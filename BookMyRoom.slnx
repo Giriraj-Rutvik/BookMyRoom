@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="BookMyRoom.Application/BookMyRoom.Application.csproj" />
+  <Project Path="BookMyRoom.Domain/BookMyRoom.Domain.csproj" />
+  <Project Path="BookMyRoom.Repository/BookMyRoom.Repository.csproj" />
+  <Project Path="BookMyRoom/BookMyRoom.csproj" />
+</Solution>
