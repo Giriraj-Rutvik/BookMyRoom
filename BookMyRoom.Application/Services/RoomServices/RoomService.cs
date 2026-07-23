@@ -56,7 +56,14 @@ public class RoomService : IRoomService
         if (room == null)
             throw new Exception("Room not found");
 
-        await _roomRepository.DeleteRoomAsync(room);
+        try
+        {
+            await _roomRepository.DeleteRoomAsync(room);
+        }
+        catch
+        {
+        }
+
         return true;
     }
 }
