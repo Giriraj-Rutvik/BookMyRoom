@@ -6,7 +6,7 @@ using BookMyRoom.Repository.Repository.Bookings;
 using BookMyRoom.Repository.Repository.RoomRepo;
 using Microsoft.EntityFrameworkCore;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
@@ -30,7 +30,7 @@ builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
 
