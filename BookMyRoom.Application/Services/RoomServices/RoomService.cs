@@ -15,7 +15,7 @@ public class RoomService : IRoomService
     public async Task<Room> CreateAsync(CreateRoomDTO model)
     {
         // Map DTO to Entity
-        var room = new Room
+        Room room = new Room
         {
             Name = model.Name,
             Location = model.Location,
@@ -31,7 +31,7 @@ public class RoomService : IRoomService
     {
         if (model.Id == 0)
             throw new Exception("Invalid id for room!");
-        var room = await _roomRepository.GetByIdAsync(model.Id);
+        Room? room = await _roomRepository.GetByIdAsync(model.Id);
 
         if (room == null)
             throw new Exception("Room not found");
@@ -52,7 +52,7 @@ public class RoomService : IRoomService
 
     public async Task<bool> DeleteRoomAsync(int id)
     {
-        var room = await _roomRepository.GetByIdAsync(id);
+        Room? room = await _roomRepository.GetByIdAsync(id);
         if (room == null)
             throw new Exception("Room not found");
 

@@ -28,7 +28,7 @@ public class BookingService : IBookingService
     #region Private Methods
     private async Task ValidateBookingAsync(int roomId, DateTime startDateTime, DateTime endDateTime)
     {
-        var room = await _roomRepository.GetByIdAsync(roomId);
+        Room? room = await _roomRepository.GetByIdAsync(roomId);
         if (room is null)
         {
             throw new Exception("Room not found");
