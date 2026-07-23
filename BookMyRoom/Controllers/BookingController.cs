@@ -1,5 +1,6 @@
 ﻿using BookMyRoom.Application.Services.BookingServices;
 using BookMyRoom.Domain.DTOs;
+using BookMyRoom.Domain.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookMyRoom.Controllers;
@@ -17,14 +18,14 @@ public class BookingController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateBookingAsync(CreateRoomBookingDTO model)
     {
-        var booking = await _bookingService.CreateBookingAsync(model);
+        Booking booking = await _bookingService.CreateBookingAsync(model);
         return Ok(new { response = booking });
     }
 
     [HttpGet]
     public async Task<IActionResult> GetBookingByRoomIdAsync(int id)
     {
-        var booking = await _bookingService.GetByRoomIdAsync(id);
+        List<Booking>? booking = await _bookingService.GetByRoomIdAsync(id);
         if (booking is not null && booking.Any())
         {
             return Ok(new { response = booking });
@@ -35,7 +36,7 @@ public class BookingController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetMyBookingsAsync(string name)
     {
-        var myBookings = await _bookingService.GetMyBookingsAsync(name);
+        List<Booking>? myBookings = await _bookingService.GetMyBookingsAsync(name);
         if (myBookings is not null && myBookings.Any())
         {
             return Ok(new { response = myBookings });
@@ -46,7 +47,7 @@ public class BookingController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAllBookingsAsync()
     {
-        var bookings = await _bookingService.GetAllBookings();
+        List<Booking>? bookings = await _bookingService.GetAllBookings();
         if (bookings is not null && bookings.Any())
         {
             return Ok(new { response = bookings });
