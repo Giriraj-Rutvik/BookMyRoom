@@ -5,6 +5,6 @@ namespace BookMyRoom.Domain.DTOs;
 public record UpdateRoomDTO
 (
     [Required(ErrorMessage = "Provide Room Id to update")]
-    int Id, 
+    int Id,
     string? name, string? location, int? capacity, string? description
 );

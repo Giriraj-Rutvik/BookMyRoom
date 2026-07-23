@@ -8,5 +8,5 @@ public record CreateRoomBookingDTO
      int RoomId,
      string BookedBy,
      DateTime StartTime,
-     DateTime EndTime 
+     DateTime EndTime
 );

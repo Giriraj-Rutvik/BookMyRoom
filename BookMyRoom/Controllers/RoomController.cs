@@ -1,5 +1,6 @@
 using BookMyRoom.Application.Services.RoomServices;
 using BookMyRoom.Domain.DTOs;
+using BookMyRoom.Domain.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookMyRoom.Controllers;
@@ -17,7 +18,7 @@ public class RoomController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateAsync(CreateRoomDTO model)
     {
-        var room = await _roomService.CreateAsync(model);
+        Room room = await _roomService.CreateAsync(model);
 
         return Ok(new
         {
@@ -28,7 +29,7 @@ public class RoomController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetByIdAsync(int id)
     {
-        var room = await _roomService.GetByIdAsync(id);
+        Room? room = await _roomService.GetByIdAsync(id);
 
         if (room is null)
         {
@@ -41,7 +42,7 @@ public class RoomController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> SearchAsync()
     {
-        var rooms = await _roomService.GetRoomsAsync();
+        List<Room>? rooms = await _roomService.GetRoomsAsync();
         if (rooms is null)
         {
             return NotFound(new { message = "No room(s) found" });
@@ -52,7 +53,7 @@ public class RoomController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> UpdateRoomDetailsAsync(UpdateRoomDTO model)
     {
-        var response = await _roomService.UpdateRoomDetailsAsync(model);
+        bool response = await _roomService.UpdateRoomDetailsAsync(model);
         if (response)
         {
             return Ok("Room Details updated successfully!");
@@ -65,7 +66,7 @@ public class RoomController : ControllerBase
     [HttpDelete]
     public async Task<IActionResult> DeleteAsync(int id)
     {
-        var response = await _roomService.DeleteRoomAsync(id);
+        bool response = await _roomService.DeleteRoomAsync(id);
         if (response)
         {
             return Ok("Room deleted successfully!");
