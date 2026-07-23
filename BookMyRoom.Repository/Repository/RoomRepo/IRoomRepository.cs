@@ -1,5 +1,4 @@
-﻿using BookMyRoom.Domain.DTOs;
-using BookMyRoom.Domain.Model;
+﻿using BookMyRoom.Domain.Model;
 
 namespace BookMyRoom.Repository.Repository.RoomRepo;
 

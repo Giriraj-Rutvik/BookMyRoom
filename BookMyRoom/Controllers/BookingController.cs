@@ -1,5 +1,4 @@
 ﻿using BookMyRoom.Application.Services.BookingServices;
-using BookMyRoom.Application.Services.RoomServices;
 using BookMyRoom.Domain.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,14 +18,14 @@ public class BookingController : ControllerBase
     public async Task<IActionResult> CreateBookingAsync(CreateRoomBookingDTO model)
     {
         var booking = await _bookingService.CreateBookingAsync(model);
-        return Ok(new {response = booking});
+        return Ok(new { response = booking });
     }
 
     [HttpGet]
     public async Task<IActionResult> GetBookingByRoomIdAsync(int id)
     {
         var booking = await _bookingService.GetByRoomIdAsync(id);
-        if(booking is not null && booking.Any())
+        if (booking is not null && booking.Any())
         {
             return Ok(new { response = booking });
         }
@@ -37,7 +36,7 @@ public class BookingController : ControllerBase
     public async Task<IActionResult> GetMyBookingsAsync(string name)
     {
         var myBookings = await _bookingService.GetMyBookingsAsync(name);
-        if(myBookings is not null && myBookings.Any())
+        if (myBookings is not null && myBookings.Any())
         {
             return Ok(new { response = myBookings });
         }
@@ -50,7 +49,7 @@ public class BookingController : ControllerBase
         var bookings = await _bookingService.GetAllBookings();
         if (bookings is not null && bookings.Any())
         {
-            return Ok(new { response = bookings});
+            return Ok(new { response = bookings });
         }
         return NotFound(new { message = "Currently not any booking found!" });
     }

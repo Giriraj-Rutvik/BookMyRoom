@@ -27,7 +27,7 @@ public class RoomService : IRoomService
     }
     public async Task<Room?> GetByIdAsync(int id) => await _roomRepository.GetByIdAsync(id);
     public async Task<List<Room>?> GetRoomsAsync() => await _roomRepository.GetRoomsAsync();
-    public async Task<bool> UpdateRoomDetailsAsync(UpdateRoomDTO model) 
+    public async Task<bool> UpdateRoomDetailsAsync(UpdateRoomDTO model)
     {
         if (model.Id == 0)
             throw new Exception("Invalid id for room!");
@@ -35,7 +35,7 @@ public class RoomService : IRoomService
 
         if (room == null)
             throw new Exception("Room not found");
-        
+
         // Update fields
         if (model.name is not null)
             room.Name = model.name;

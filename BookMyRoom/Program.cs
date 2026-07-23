@@ -4,7 +4,6 @@ using BookMyRoom.Middleware;
 using BookMyRoom.Repository.DBContext;
 using BookMyRoom.Repository.Repository.Bookings;
 using BookMyRoom.Repository.Repository.RoomRepo;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
