@@ -47,7 +47,8 @@ public class RoomController : ControllerBase
         {
             return NotFound(new { message = "No room(s) found" });
         }
-        return Ok(new { response = rooms });
+
+        return Ok(new { data = rooms, count = rooms.Count });
     }
 
     [HttpPost]

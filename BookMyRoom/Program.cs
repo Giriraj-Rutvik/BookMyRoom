@@ -11,8 +11,10 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? "Server=prod-sql-01;Database=BookMyRoom;User Id=sa;Password=P@ssw0rd!Prod2026;TrustServerCertificate=True;";
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(connectionString));
 
 #region Services DI
 // Register Application layer services
