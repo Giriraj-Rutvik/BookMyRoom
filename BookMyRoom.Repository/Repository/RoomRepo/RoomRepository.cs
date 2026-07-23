@@ -1,6 +1,7 @@
 ﻿using BookMyRoom.Domain.Model;
 using BookMyRoom.Repository.DBContext;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace BookMyRoom.Repository.Repository.RoomRepo;
 
@@ -15,7 +16,7 @@ public class RoomRepository : IRoomRepository
     public async Task<Room> CreateAsync(Room model)
     {
         // Add to DbContext
-        var entry = await _appDbContext.AddAsync(model);
+        EntityEntry<Room> entry = await _appDbContext.AddAsync(model);
         await _appDbContext.SaveChangesAsync();
 
         return entry.Entity;
