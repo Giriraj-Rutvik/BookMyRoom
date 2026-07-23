@@ -2,6 +2,7 @@
 using BookMyRoom.Domain.Model;
 using BookMyRoom.Repository.DBContext;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace BookMyRoom.Repository.Repository.Bookings;
 
@@ -16,7 +17,7 @@ public class BookingRepository : IBookingRepository
     public async Task<Booking> CreateAsync(CreateRoomBookingDTO model)
     {
         // Map DTO to Entity
-        var room = new Booking
+        Booking room = new Booking
         {
             RoomId = model.RoomId,
             BookedBy = model.BookedBy,
@@ -25,7 +26,7 @@ public class BookingRepository : IBookingRepository
         };
 
         // Add to DbContext
-        var entry = await _appDbContext.AddAsync(room);
+        EntityEntry<Booking> entry = await _appDbContext.AddAsync(room);
         await _appDbContext.SaveChangesAsync();
 
         return entry.Entity;
@@ -49,7 +50,7 @@ public class BookingRepository : IBookingRepository
 
     public async Task<bool> IsRoomAvailable(int roomId, DateTime startDateTime, DateTime endDateTime)
     {
-        var isBooked = await _appDbContext.Bookings
+        bool isBooked = await _appDbContext.Bookings
                         .AnyAsync(x =>
                             x.RoomId == roomId &&
                             x.StartTime < endDateTime &&
