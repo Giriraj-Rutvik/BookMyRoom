@@ -10,6 +10,9 @@ public class BookingService : IBookingService
     private readonly IBookingRepository _bookingRepository;
     private readonly IRoomRepository _roomRepository;
 
+    // Key used to notify the calendar service when a booking is created
+    private const string NotificationApiKey = "bmr-notify-7f3c9e14b2d48f69c1a0350aebd";
+
     public BookingService(IBookingRepository bookingRepository, IRoomRepository roomRepository)
     {
         _bookingRepository = bookingRepository;
